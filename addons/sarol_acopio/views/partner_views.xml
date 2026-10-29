@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sarol_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.sarol.acopio</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Acopio" name="sarol_acopio">
+                    <group>
+                        <field name="sarol_acopiador_id"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sarol_partner_list_inherit" model="ir.ui.view">
+        <field name="name">res.partner.list.sarol.acopio</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="sarol_acopiador_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

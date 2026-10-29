@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_sarol_acopio" model="ir.module.category">
+        <field name="name">Acopio SAROL</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="group_sarol_acopiador" model="res.groups">
+        <field name="name">Acopiador</field>
+        <field name="category_id" ref="module_category_sarol_acopio"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_sarol_planta" model="res.groups">
+        <field name="name">Recepción en planta</field>
+        <field name="category_id" ref="module_category_sarol_acopio"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_sarol_ingeniero" model="res.groups">
+        <field name="name">Ingeniero de planta</field>
+        <field name="category_id" ref="module_category_sarol_acopio"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_sarol_admin" model="res.groups">
+        <field name="name">Administración</field>
+        <field name="category_id" ref="module_category_sarol_acopio"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user')), (4, ref('purchase.group_purchase_user'))]"/>
+    </record>
+
+    <!-- El usuario Administrator de la base recibe el rol Administración -->
+    <record id="base.user_admin" model="res.users">
+        <field name="groups_id" eval="[(4, ref('group_sarol_admin'))]"/>
+    </record>
+
+    <!-- Reglas: cada acopiador ve solo sus planillas -->
+    <record id="rule_planilla_acopiador" model="ir.rule">
+        <field name="name">Planilla: el acopiador ve solo las suyas</field>
+        <field name="model_id" ref="model_sarol_planilla"/>
+        <field name="domain_force">[('acopiador_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_sarol_acopiador'))]"/>
+    </record>
+
+    <record id="rule_planilla_todas" model="ir.rule">
+        <field name="name">Planilla: planta, ingeniero y administración ven todas</field>
+        <field name="model_id" ref="model_sarol_planilla"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_sarol_planta')), (4, ref('group_sarol_ingeniero')), (4, ref('group_sarol_admin'))]"/>
+    </record>
+
+    <record id="rule_linea_acopiador" model="ir.rule">
+        <field name="name">Entregas: el acopiador ve solo las suyas</field>
+        <field name="model_id" ref="model_sarol_planilla_linea"/>
+        <field name="domain_force">[('planilla_id.acopiador_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_sarol_acopiador'))]"/>
+    </record>
+
+    <record id="rule_linea_todas" model="ir.rule">
+        <field name="name">Entregas: planta, ingeniero y administración ven todas</field>
+        <field name="model_id" ref="model_sarol_planilla_linea"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_sarol_planta')), (4, ref('group_sarol_ingeniero')), (4, ref('group_sarol_admin'))]"/>
+    </record>
+</odoo>

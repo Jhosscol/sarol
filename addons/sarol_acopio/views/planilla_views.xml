@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sarol_planilla_view_list" model="ir.ui.view">
+        <field name="name">sarol.planilla.list</field>
+        <field name="model">sarol.planilla</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="state == 'confirmada' and diferencia != 0"
+                  decoration-success="state == 'confirmada' and diferencia == 0">
+                <field name="fecha"/>
+                <field name="acopiador_id"/>
+                <field name="litros_acopiador" sum="Total"/>
+                <field name="litros_planta" sum="Total"/>
+                <field name="diferencia" sum="Total"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="sarol_planilla_view_form" model="ir.ui.view">
+        <field name="name">sarol.planilla.form</field>
+        <field name="model">sarol.planilla</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_cargar_proveedores" string="Cargar mis proveedores"
+                            type="object" invisible="state != 'borrador'"/>
+                    <button name="action_confirmar" string="Confirmar planilla"
+                            type="object" class="btn-primary" invisible="state != 'borrador'"/>
+                    <button name="action_borrador" string="Volver a borrador"
+                            type="object" invisible="state != 'confirmada'"
+                            groups="sarol_acopio.group_sarol_admin"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="fecha" readonly="state != 'borrador'"/>
+                            <field name="acopiador_id" readonly="state != 'borrador'"/>
+                        </group>
+                        <group>
+                            <field name="puede_editar_planta" invisible="1"/>
+                            <field name="litros_acopiador"/>
+                            <field name="litros_planta" readonly="not puede_editar_planta"/>
+                            <field name="diferencia"/>
+                        </group>
+                    </group>
+                    <field name="linea_ids" readonly="state != 'borrador'">
+                        <list editable="bottom">
+                            <field name="proveedor_id" options="{'no_create': True}"/>
+                            <field name="litros" sum="Total litros"/>
+                            <field name="observacion"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sarol_planilla_view_search" model="ir.ui.view">
+        <field name="name">sarol.planilla.search</field>
+        <field name="model">sarol.planilla</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="acopiador_id"/>
+                <field name="fecha"/>
+                <filter name="con_diferencia" string="Con diferencia" domain="[('diferencia', '!=', 0)]"/>
+                <filter name="en_borrador" string="En borrador" domain="[('state', '=', 'borrador')]"/>
+                <filter name="g_acopiador" string="Acopiador" context="{'group_by': 'acopiador_id'}"/>
+                <filter name="g_fecha" string="Día" context="{'group_by': 'fecha:day'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="sarol_planilla_action" model="ir.actions.act_window">
+        <field name="name">Planillas diarias</field>
+        <field name="res_model">sarol.planilla</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sarol_tarifa_view_list" model="ir.ui.view">
+        <field name="name">sarol.tarifa.list</field>
+        <field name="model">sarol.tarifa</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="fecha_desde"/>
+                <field name="tarifa_normal"/>
+                <field name="tarifa_reducida"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="sarol_tarifa_action" model="ir.actions.act_window">
+        <field name="name">Tarifas</field>
+        <field name="res_model">sarol.tarifa</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

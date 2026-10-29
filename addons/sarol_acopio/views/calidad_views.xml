@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sarol_calidad_view_list" model="ir.ui.view">
+        <field name="name">sarol.calidad.list</field>
+        <field name="model">sarol.calidad</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" decoration-danger="resultado == 'baja'">
+                <field name="fecha"/>
+                <field name="proveedor_id" options="{'no_create': True}"/>
+                <field name="resultado"/>
+                <field name="observacion"/>
+                <field name="semana_inicio" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="sarol_calidad_view_search" model="ir.ui.view">
+        <field name="name">sarol.calidad.search</field>
+        <field name="model">sarol.calidad</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="proveedor_id"/>
+                <filter name="baja" string="Baja calidad" domain="[('resultado', '=', 'baja')]"/>
+                <filter name="g_proveedor" string="Proveedor" context="{'group_by': 'proveedor_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="sarol_calidad_action" model="ir.actions.act_window">
+        <field name="name">Análisis de calidad</field>
+        <field name="res_model">sarol.calidad</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

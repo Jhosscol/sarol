@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="sarol_tarifa_inicial" model="sarol.tarifa">
+        <field name="fecha_desde">2026-01-01</field>
+        <field name="tarifa_normal">1.20</field>
+        <field name="tarifa_reducida">1.00</field>
+    </record>
+</odoo>

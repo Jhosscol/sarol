@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_planilla_acopiador,sarol.planilla acopiador,model_sarol_planilla,group_sarol_acopiador,1,1,1,0
+access_planilla_planta,sarol.planilla planta,model_sarol_planilla,group_sarol_planta,1,1,0,0
+access_planilla_ingeniero,sarol.planilla ingeniero,model_sarol_planilla,group_sarol_ingeniero,1,0,0,0
+access_planilla_admin,sarol.planilla admin,model_sarol_planilla,group_sarol_admin,1,1,1,1
+access_linea_acopiador,sarol.planilla.linea acopiador,model_sarol_planilla_linea,group_sarol_acopiador,1,1,1,1
+access_linea_planta,sarol.planilla.linea planta,model_sarol_planilla_linea,group_sarol_planta,1,0,0,0
+access_linea_ingeniero,sarol.planilla.linea ingeniero,model_sarol_planilla_linea,group_sarol_ingeniero,1,0,0,0
+access_linea_admin,sarol.planilla.linea admin,model_sarol_planilla_linea,group_sarol_admin,1,1,1,1
+access_calidad_ingeniero,sarol.calidad ingeniero,model_sarol_calidad,group_sarol_ingeniero,1,1,1,1
+access_calidad_admin,sarol.calidad admin,model_sarol_calidad,group_sarol_admin,1,1,1,1
+access_tarifa_ingeniero,sarol.tarifa ingeniero,model_sarol_tarifa,group_sarol_ingeniero,1,0,0,0
+access_tarifa_admin,sarol.tarifa admin,model_sarol_tarifa,group_sarol_admin,1,1,1,1
+access_pago_ingeniero,sarol.pago ingeniero,model_sarol_pago,group_sarol_ingeniero,1,0,0,0
+access_pago_admin,sarol.pago admin,model_sarol_pago,group_sarol_admin,1,1,1,1

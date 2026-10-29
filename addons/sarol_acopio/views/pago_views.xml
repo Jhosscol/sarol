@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sarol_pago_view_list" model="ir.ui.view">
+        <field name="name">sarol.pago.list</field>
+        <field name="model">sarol.pago</field>
+        <field name="arch" type="xml">
+            <list decoration-warning="baja_calidad">
+                <field name="semana_inicio"/>
+                <field name="proveedor_id"/>
+                <field name="litros_total" sum="Total litros"/>
+                <field name="baja_calidad"/>
+                <field name="tarifa_aplicada"/>
+                <field name="monto" sum="Total S/"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="sarol_pago_view_form" model="ir.ui.view">
+        <field name="name">sarol.pago.form</field>
+        <field name="model">sarol.pago</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_recalcular" string="Recalcular" type="object"
+                            invisible="state != 'borrador'" groups="sarol_acopio.group_sarol_admin"/>
+                    <button name="action_crear_orden" string="Crear orden de compra" type="object"
+                            class="btn-primary" invisible="state != 'borrador'"
+                            groups="sarol_acopio.group_sarol_admin"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="proveedor_id"/>
+                            <field name="semana_inicio"/>
+                            <field name="semana_fin"/>
+                        </group>
+                        <group>
+                            <field name="litros_total"/>
+                            <field name="baja_calidad"/>
+                            <field name="tarifa_aplicada"/>
+                            <field name="monto"/>
+                            <field name="purchase_order_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sarol_pago_view_search" model="ir.ui.view">
+        <field name="name">sarol.pago.search</field>
+        <field name="model">sarol.pago</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="proveedor_id"/>
+                <field name="semana_inicio"/>
+                <filter name="por_revisar" string="Por revisar" domain="[('state', '=', 'borrador')]"/>
+                <filter name="baja" string="Baja calidad" domain="[('baja_calidad', '=', True)]"/>
+                <filter name="g_semana" string="Semana" context="{'group_by': 'semana_inicio'}"/>
+                <filter name="g_proveedor" string="Proveedor" context="{'group_by': 'proveedor_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="sarol_pago_action" model="ir.actions.act_window">
+        <field name="name">Pagos semanales</field>
+        <field name="res_model">sarol.pago</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

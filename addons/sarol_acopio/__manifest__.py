@@ -1,0 +1,23 @@
+{
+    'name': 'SAROL - Acopio de leche',
+    'version': '18.0.1.0.0',
+    'summary': 'Planillas diarias de acopio, conciliación de litros, calidad, tarifa y pago semanal',
+    'category': 'Inventory/Purchase',
+    'author': 'Equipo SAROL - UNAP',
+    'license': 'LGPL-3',
+    'depends': ['purchase'],
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'data/tarifa_data.xml',
+        'views/partner_views.xml',
+        'views/planilla_views.xml',
+        'views/calidad_views.xml',
+        'views/tarifa_views.xml',
+        'views/pago_views.xml',
+        'views/wizard_views.xml',
+        'views/menus.xml',
+    ],
+    'application': True,
+    'installable': True,
+}

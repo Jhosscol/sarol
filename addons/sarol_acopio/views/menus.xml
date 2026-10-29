@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_sarol_root" name="Acopio" sequence="40"
+              groups="sarol_acopio.group_sarol_acopiador,sarol_acopio.group_sarol_planta,sarol_acopio.group_sarol_ingeniero,sarol_acopio.group_sarol_admin"/>
+
+    <menuitem id="menu_sarol_planillas" name="Planillas diarias" parent="menu_sarol_root"
+              action="sarol_planilla_action" sequence="10"/>
+
+    <menuitem id="menu_sarol_calidad" name="Calidad" parent="menu_sarol_root"
+              action="sarol_calidad_action" sequence="20"
+              groups="sarol_acopio.group_sarol_ingeniero,sarol_acopio.group_sarol_admin"/>
+
+    <menuitem id="menu_sarol_pagos" name="Pagos semanales" parent="menu_sarol_root"
+              action="sarol_pago_action" sequence="30"
+              groups="sarol_acopio.group_sarol_ingeniero,sarol_acopio.group_sarol_admin"/>
+
+    <menuitem id="menu_sarol_generar" name="Generar pagos de la semana" parent="menu_sarol_root"
+              action="sarol_pago_generar_action" sequence="40"
+              groups="sarol_acopio.group_sarol_admin"/>
+
+    <menuitem id="menu_sarol_tarifas" name="Tarifas" parent="menu_sarol_root"
+              action="sarol_tarifa_action" sequence="50"
+              groups="sarol_acopio.group_sarol_admin"/>
+</odoo>
